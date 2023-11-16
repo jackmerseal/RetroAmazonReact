@@ -10,8 +10,8 @@ export default function NavBar() {
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="/about" className="nav-link">
-            About
+          <NavLink to="/login" className="nav-link">
+            Login
           </NavLink>
         </li>
         <li className="nav-item">

@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import NavBar from './components/NavBar';
 import BookList from './components/BookList';
+import LoginForm from './components/LoginForm';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <main className="flex-grow-1">
           <Routes>
             <Route path="/" element={<BookList />} />
-            <Route path="/about" element={<h1>About</h1>} />
+            <Route path="/login" element={<LoginForm />} />
             <Route path="/contact" element={<h1>Contact</h1>} />
           </Routes>
         </main>
