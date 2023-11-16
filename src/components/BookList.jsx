@@ -15,7 +15,7 @@ export default function BookList() {
   return (
     <>
       <h1>Book List</h1>
-      {!books.length ? <h2>No Books to display</h2> : 
+      {!books.length ? <h2>No books to display</h2> : 
         books.map(book => {
         return(
           <div key={book.id}>

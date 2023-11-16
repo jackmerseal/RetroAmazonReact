@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-export default function LoginForm() {
+export default function LoginForm({onLogin}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(''); 
@@ -24,8 +24,11 @@ export default function LoginForm() {
     axios.post("http://localhost:3003/api/users/login", {
         email: email,
         password: password
+    },{
+      withCredentials: true
     }).then(response => {
-      console.log(response);
+      const auth = response.data;
+      onLogin(auth);
     }).catch(error => {
       console.log(error);
     });
