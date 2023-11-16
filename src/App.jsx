@@ -8,25 +8,6 @@ import LoginForm from './components/LoginForm';
 
 function App() {
 
-  const [auth, setAuth] = useState(null);
-
-  useEffect(() => {
-    if(localStorage){
-      const auth = localStorage.getItem("auth");
-      if(auth){
-        setAuth(JSON.parse(auth));
-      }
-    }
-  },[]);
-
-  function onLogin(auth) {
-    setAuth(auth);
-
-    if(localStorage){
-      localStorage.setItem("auth", JSON.stringify(auth));
-    }
-  }
-
   return (
     <>
       <div className="container d-flex flex-column min-vh-100">
@@ -36,7 +17,7 @@ function App() {
         <main className="flex-grow-1">
           <Routes>
             <Route path="/" element={<BookList />} />
-            <Route path="/login" element={<LoginForm onLogin={onLogin}/>} />
+            <Route path="/login" element={<LoginForm />} />
             <Route path="/contact" element={<h1>Contact</h1>} />
           </Routes>
         </main>

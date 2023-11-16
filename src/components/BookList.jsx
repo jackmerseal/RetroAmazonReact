@@ -5,7 +5,8 @@ export default function BookList() {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3003/api/books/list").then(response => {
+    axios.get("http://localhost:3003/api/books/list", {withCredentials: true})
+    .then(response => {
       setBooks(response.data);
     })
     .catch((error) => console.log(error)
