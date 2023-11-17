@@ -5,6 +5,13 @@ import {Link} from "react-router-dom";
 export default function BookList() {
   const [books, setBooks] = useState([]);
 
+  function onBookDelete(evt, bookId) {
+    evt.preventDefault();
+    axios.delete(`http://localhost:3003/api/books/delete/${bookId}`, {withCredentials: true})
+    .then(response => console.log(response.data))
+    .catch(error => console.log(error));
+  }
+
   useEffect(() => {
     axios.get("http://localhost:3003/api/books/list", {withCredentials: true})
     .then(response => {
@@ -19,8 +26,19 @@ export default function BookList() {
       {!books.length ? <h2>Please <Link to='/login'>Login</Link> to see books</h2> : 
           <div className="row">
             {books.map((book) => (
-              <div key={book._id}>
-                </div>
+              <div key={book._id} className="col-4">
+                <div className="card">
+                  <div className="card-header">
+                    {book.title}
+                  </div>
+                  <div className="card-body">
+                    <p className="card-text">{book.description}</p>
+                  </div>
+                  <div className="card-footer">
+                    <button className="btn btn-danger" onClick={(evt) => onBookDelete(evt, book._id)}>Delete</button>
+                  </div>
+              </div>
+            </div>
             ))}
         </div>
       }
