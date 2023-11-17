@@ -4,11 +4,15 @@ import {Link} from "react-router-dom";
 
 export default function BookList() {
   const [books, setBooks] = useState([]);
+  const [deleteCounter, setDeleteCounter] = useState(0);
 
   function onBookDelete(evt, bookId) {
     evt.preventDefault();
     axios.delete(`http://localhost:3003/api/books/delete/${bookId}`, {withCredentials: true})
-    .then(response => console.log(response.data))
+    .then(response => {
+      setDeleteCounter(prevCount => prevCount + 1);
+      console.log(response.data);
+    })
     .catch(error => console.log(error));
   }
 
@@ -18,7 +22,7 @@ export default function BookList() {
       setBooks(response.data);
     })
     .catch((error) => console.log(error));
-  }, []);
+  }, [deleteCounter]);
 
   return (
     <>
