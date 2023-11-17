@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import axios from 'axios';
-export default function LoginForm() {
+import { useNavigate } from 'react-router-dom';
+
+export default function LoginForm({setFullName}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(''); 
+
+  const navigate = useNavigate();
 
   const emailError = !email ? "Email is required" : 
   !email.includes("@") ? "Email must contain @" : "";
@@ -11,6 +15,7 @@ export default function LoginForm() {
   const passwordError = !password ? "Password is required" :
   password.length < 8 ? "Password must be at least 8 characters" : "";
 
+  
   function onSubmitLogin(evt) {
     setError("");
     evt.preventDefault();
@@ -21,21 +26,31 @@ export default function LoginForm() {
       setError(passwordError);
       return;
     }
-    axios.post("http://localhost:3003/api/users/login", {
-        email: email,
-        password: password
-    },{
-      withCredentials: true
-    }).then(response => {
-      console.log(response.data);
+    axios.post("http://localhost:3003/api/users/login", {email,password}, {withCredentials: true}).then(response => {
+      console.log(response.data.fullName);
+      localStorage.setItem("fullName", response.data.fullName);
+      setFullName(response.data.fullName);
+      navigate("/");
     }).catch(error => {
-      console.log(error);
+
+      const resError = error?.response?.data;
+
+      if(resError){
+        //Bad Username or Password
+        console.log(resError);
+      
+        if(typeof resError === "string"){
+          setError(`string ${resError}`);
+        }else if(resError.error){ //Joi Validation Error
+          setError(`array ${resError.error[0]}`);
+        }
+      }
     });
   }
 
   return (
     <>
-      <div className="row">
+      <div className="row mt-4">
         <div className="col-4"></div>
         <div className="col-4">
           <form>

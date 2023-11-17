@@ -1,5 +1,6 @@
 import axios from "axios";
 import {useState, useEffect} from "react";
+import {Link} from "react-router-dom";
 
 export default function BookList() {
   const [books, setBooks] = useState([]);
@@ -9,23 +10,19 @@ export default function BookList() {
     .then(response => {
       setBooks(response.data);
     })
-    .catch((error) => console.log(error)
-    );
+    .catch((error) => console.log(error));
   }, []);
 
   return (
     <>
       <h1>Book List</h1>
-      {!books.length ? <h2>No books to display</h2> : 
-        books.map(book => {
-        return(
-          <div key={book.id}>
-            <h2>{book.title}</h2>
-            <h3>{book.author}</h3>
-            <p>{book.description}</p>
-            </div>
-        )
-        })
+      {!books.length ? <h2>Please <Link to='/login'>Login</Link> to see books</h2> : 
+          <div className="row">
+            {books.map((book) => (
+              <div key={book._id}>
+                </div>
+            ))}
+        </div>
       }
     </>
   );
