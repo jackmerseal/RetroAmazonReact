@@ -26,7 +26,7 @@ export default function LoginForm({setFullName}) {
       setError(passwordError);
       return;
     }
-    axios.post("http://localhost:3003/api/users/login", {email,password}, {withCredentials: true}).then(response => {
+    axios.post(`${import.meta.env.VITE_API_URL}/api/users/login`, {email,password}, {withCredentials: true}).then(response => {
       console.log(response.data.fullName);
       localStorage.setItem("fullName", response.data.fullName);
       setFullName(response.data.fullName);
