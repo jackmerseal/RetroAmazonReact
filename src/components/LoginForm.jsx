@@ -15,7 +15,6 @@ export default function LoginForm({setFullName}) {
   const passwordError = !password ? "Password is required" :
   password.length < 8 ? "Password must be at least 8 characters" : "";
 
-  
   function onSubmitLogin(evt) {
     setError("");
     evt.preventDefault();

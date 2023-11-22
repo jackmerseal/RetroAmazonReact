@@ -6,6 +6,7 @@ import BookItem from "./BookItem";
 export default function BookList({showToast}) {
   const [books, setBooks] = useState([]);
   const [deleteCounter, setDeleteCounter] = useState(0);
+  const [updateCounter, setUpdateCounter] = useState(0);
 
   function onBookDelete(evt, bookId) {
     evt.preventDefault();
