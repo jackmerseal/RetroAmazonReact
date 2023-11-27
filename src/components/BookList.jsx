@@ -32,7 +32,7 @@ export default function BookList({showToast}) {
       {!books.length ? <h2>Please <Link to='/login'>Login</Link> to see books</h2> : 
           <div className="row">
             {books.map((book) => (
-              <BookItem book = {book} key={book._id} onBookDelete={onBookDelete} />
+              <BookItem book = {book} key={book._id} onBookDelete={onBookDelete} userRole={userRole} />
             ))}
         </div>
       }

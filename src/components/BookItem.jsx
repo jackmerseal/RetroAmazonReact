@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 
-export default function BookItem({book, onBookDelete, onBookUpdate}) {
+export default function BookItem({book, onBookDelete, onBookUpdate, userRole}) {
   return(
     
 
@@ -14,7 +14,7 @@ export default function BookItem({book, onBookDelete, onBookUpdate}) {
                   </div>
                   <div className="card-footer">
                     <button className="btn btn-danger" onClick={(evt) => onBookDelete(evt, book._id)}>Delete</button>
-                    <Link to={`/update/${book._id}`} className="btn btn-info">Update</Link>
+                    {userRole.includes("admin") && <Link to={`/update/${book._id}`} className="btn btn-info">Update</Link>}
                   </div>
               </div>
             </div>

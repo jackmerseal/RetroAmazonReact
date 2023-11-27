@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
 
   const [fullName, setFullName] = useState("");
+  const [userRole, setUserRole] = useState({});
 
   useEffect(() => {
     const fullName = localStorage.getItem("fullName");
@@ -31,13 +32,13 @@ function App() {
     <>
       <div className="container d-flex flex-column min-vh-100">
         <header>
-          <NavBar fullName={fullName} setFullName={setFullName} />
+          <NavBar fullName={fullName} setFullName={{setFullName, setUserRole}} />
         </header>
         <main className="flex-grow-1">
           <ToastContainer />
           <Routes>
-            <Route path="/" element={<BookList showToast={showToast} />} />
-            <Route path="/login" element={<LoginForm setFullName={setFullName} />} />
+            <Route path="/" element={<BookList showToast={showToast} userRole={userRole} />} />
+            <Route path="/login" element={<LoginForm setFullName={setFullName} setUserRole={setUserRole} />} />
             <Route path="/contact" element={<h1>Contact</h1>} />
             <Route path="/update/:bookId" element={<BookEditor showToast={showToast}/>}/>
           </Routes>
